@@ -1,0 +1,29 @@
+services:
+  nexusflow-db:
+    image: postgres:17-alpine
+    container_name: nexusflow-auth-db
+    environment:
+      POSTGRES_DB: nexusflow_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0000
+    ports:
+      - "5433:5432"
+    networks:
+      - nexus-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: nexusflow-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@nexusflow.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    networks:
+      - nexus-network
+    depends_on:
+      - nexusflow-db
+
+networks:
+  nexus-network:
+    driver: bridge
