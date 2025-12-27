@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AuthServiceApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("user.dir", "..");
 		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
