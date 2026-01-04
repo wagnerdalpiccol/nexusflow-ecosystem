@@ -1,11 +1,14 @@
+server:
+  port: 8082
+  
 spring:
   application:
     name: notification-service
 
   datasource:
-    url: ${BD_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${BD_URL:jdbc:postgresql://localhost:5433/nexusflow_auth}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:1234}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -16,3 +19,15 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+      bootstrap-servers: localhost:9092
+      consumer:
+        group-id: notification-group
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+        properties:
+          spring.json.trusted.packages: "*"
+          spring.json.value.default.type: "com.nexusflow.notification_service.domain.event.UserCreatedEvent"
+          spring.json.use.type.headers: false
