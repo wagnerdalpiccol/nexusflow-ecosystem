@@ -16,17 +16,13 @@ public class AuthServiceApplication {
 		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 	
-	@Bean
-	CommandLineRunner initDatabase(UserRepository userRepository) {
-	    return args -> {
-	        User testUser = new User();
-	        testUser.setName("Wagner");
-	        testUser.setEmail("wagner@teste.com");
-	        testUser.setPassword("123456");
-	        
-	        userRepository.save(testUser);
-	        System.out.println(">>> USUÁRIO DE TESTE SALVO COM SUCESSO!");
-	    };
-	}
+	/*
+	 * @Bean CommandLineRunner initDatabase(UserRepository userRepository) { return
+	 * args -> { User testUser = new User(); testUser.setName("Wagner");
+	 * testUser.setEmail("wagner@teste.com"); testUser.setPassword("123456");
+	 * 
+	 * userRepository.save(testUser);
+	 * System.out.println(">>> USUÁRIO DE TESTE SALVO COM SUCESSO!"); }; }
+	 */
 
 }
